@@ -1,0 +1,33 @@
+﻿@page
+@model RezSarasasModel
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4">Rezervacijų sąrašas</h1>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numeris</th>
+                <th>Veiksmai</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>00001</td>
+                <td>
+                    <button onclick="document.location='RezPerziura'" class="btn btn-primary">Peržiūrėti</button>
+                    <button onclick="document.location='RezRedagavimas'" class="btn btn-success">Redaguoti</button>
+                </td>
+            </tr>
+            <tr>
+                <td>00002</td>
+                <td>
+                    <button onclick="document.location='RezPerziura'" class="btn btn-primary">Peržiūrėti</button>
+                    <button onclick="document.location='RezRedagavimas'" class="btn btn-success">Redaguoti</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
