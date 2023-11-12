@@ -1,0 +1,58 @@
+﻿@page
+@model RezPerziuraModel
+@{
+}
+
+<script src="https://www.paypal.com/sdk/js?client-id=AZuXw_-oNc4FPfB0upy_o4-tmaNVxSLx82JX1EdRNz6CpIAphrUXj03gnnEKyN4l2aRhs3qubbMt5jrY"></script>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <button id="moketi-button" type="button" class="btn btn-outline-dark btn-lg">
+        Mokėti
+    </button>
+    <div id="paypal-button-container"></div>
+</div>
+
+<script>
+    var paymentButton = document.getElementById('moketi-button');
+    var paypalContainer = document.getElementById('paypal-button-container');
+    // Initialize PayPal buttons
+    var paypalButtons = paypal.Buttons({
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '30'
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                // Handle the payment success
+                alert('Mokėjimas sėkmingas!');
+                // Hide the PayPal container and "Mokėti" button
+                paypalContainer.style.display = 'none';
+                paymentButton.style.display = 'none';
+            });
+        },
+        onCancel: function (data) {
+            alert('Payment unsuccessful. The payment was canceled.');
+        }
+    });
+
+    // Add click event listener to "Mokėti" button
+    paymentButton.addEventListener('click', function () {
+        paypalContainer.style.display = (paypalContainer.style.display === 'none' || paypalContainer.style.display === '') ? 'block' : 'none';
+        // If the container is visible, render PayPal buttons
+        if (paypalContainer.style.display === 'block') {
+            paypalButtons.render('#paypal-button-container');
+        }
+    });
+</script>
+
+
+<div class="text-center">
+    <h1 class="display-4">Rezervacijos peržiūra</h1>
+    <hr />
+    <img src="../unithorn.png" width="200" height="200" />
+</div>

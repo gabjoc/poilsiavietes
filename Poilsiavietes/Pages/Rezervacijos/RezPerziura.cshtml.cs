@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Poilsiavietes.Pages.Rezervacija
+namespace Poilsiavietes.Pages.Rezervacijos
 {
-    public class KurimasModel : PageModel
+    public class RezPerziuraModel : PageModel
     {
         public void OnGet()
         {
