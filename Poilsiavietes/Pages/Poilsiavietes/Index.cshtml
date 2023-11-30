@@ -1,0 +1,102 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Pavadinimas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].NaktiesKaina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Adresas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].PastoKodas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].MiegamujuSkaicius)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].VoniosKambariuSk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Taisykles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Aktyvumas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Reitingas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].FkIdNaudotojasNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].FkKodasNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poilsiaviete[0].TipasNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Poilsiaviete) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pavadinimas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NaktiesKaina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PastoKodas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiegamujuSkaicius)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VoniosKambariuSk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Taisykles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aktyvumas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reitingas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIdNaudotojasNavigation.IdNaudotojas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkKodasNavigation.Kodas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipasNavigation.IdTipas)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.IdPoilsiaviete">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.IdPoilsiaviete">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.IdPoilsiaviete">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

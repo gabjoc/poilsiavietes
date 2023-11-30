@@ -1,10 +1,90 @@
 ﻿@page
-@model RedagavimasModel
+@model EditModel
+
 @{
+    ViewData["Title"] = "Edit";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Poilsiavietės redagavimas</h1>
-    <hr />
-    <img src="../temper.png" width="200" height="200" />
+<h1>Edit</h1>
+
+<h4>Poilsiaviete</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.Pavadinimas" class="control-label"></label>
+                <input asp-for="Poilsiaviete.Pavadinimas" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.Pavadinimas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.NaktiesKaina" class="control-label"></label>
+                <input asp-for="Poilsiaviete.NaktiesKaina" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.NaktiesKaina" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.Adresas" class="control-label"></label>
+                <input asp-for="Poilsiaviete.Adresas" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.Adresas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.PastoKodas" class="control-label"></label>
+                <input asp-for="Poilsiaviete.PastoKodas" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.PastoKodas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.MiegamujuSkaicius" class="control-label"></label>
+                <input asp-for="Poilsiaviete.MiegamujuSkaicius" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.MiegamujuSkaicius" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.VoniosKambariuSk" class="control-label"></label>
+                <input asp-for="Poilsiaviete.VoniosKambariuSk" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.VoniosKambariuSk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.Taisykles" class="control-label"></label>
+                <input asp-for="Poilsiaviete.Taisykles" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.Taisykles" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Poilsiaviete.Aktyvumas" /> @Html.DisplayNameFor(model => model.Poilsiaviete.Aktyvumas)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.Reitingas" class="control-label"></label>
+                <input asp-for="Poilsiaviete.Reitingas" class="form-control" />
+                <span asp-validation-for="Poilsiaviete.Reitingas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.Tipas" class="control-label"></label>
+                <select asp-for="Poilsiaviete.Tipas" class="form-control" asp-items="ViewBag.Tipas"></select>
+                <span asp-validation-for="Poilsiaviete.Tipas" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Poilsiaviete.IdPoilsiaviete" />
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.FkIdNaudotojas" class="control-label"></label>
+                <select asp-for="Poilsiaviete.FkIdNaudotojas" class="form-control" asp-items="ViewBag.FkIdNaudotojas"></select>
+                <span asp-validation-for="Poilsiaviete.FkIdNaudotojas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.FkKodas" class="control-label"></label>
+                <select asp-for="Poilsiaviete.FkKodas" class="form-control" asp-items="ViewBag.FkKodas"></select>
+                <span asp-validation-for="Poilsiaviete.FkKodas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -9,16 +9,17 @@ using Poilsiavietes.Models;
 
 namespace Poilsiavietes.Pages.Poilsiavietes
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly PoilsiavietesContext _context;
 
-        public DetailsModel(PoilsiavietesContext context)
+        public DeleteModel(PoilsiavietesContext context)
         {
             _context = context;
         }
 
-      public Poilsiaviete Poilsiaviete { get; set; } = default!; 
+        [BindProperty]
+      public Poilsiaviete Poilsiaviete { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,6 +29,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             }
 
             var poilsiaviete = await _context.Poilsiavietes.FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
+
             if (poilsiaviete == null)
             {
                 return NotFound();
@@ -37,6 +39,24 @@ namespace Poilsiavietes.Pages.Poilsiavietes
                 Poilsiaviete = poilsiaviete;
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null || _context.Poilsiavietes == null)
+            {
+                return NotFound();
+            }
+            var poilsiaviete = await _context.Poilsiavietes.FindAsync(id);
+
+            if (poilsiaviete != null)
+            {
+                Poilsiaviete = poilsiaviete;
+                _context.Poilsiavietes.Remove(Poilsiaviete);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }
