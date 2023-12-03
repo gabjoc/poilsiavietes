@@ -27,7 +27,8 @@ namespace Poilsiavietes.Pages.Poilsiavietes
                 return NotFound();
             }
 
-            var poilsiaviete = await _context.Poilsiavietes.FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
+            var poilsiaviete = await _context.Poilsiavietes.Include(t => t.TipasNavigation)
+                .FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
             if (poilsiaviete == null)
             {
                 return NotFound();
