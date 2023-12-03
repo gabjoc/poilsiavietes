@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Poilsiavietes.Models;
@@ -22,7 +18,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         {
         ViewData["FkIdNaudotojas"] = new SelectList(_context.Naudotojais, "IdNaudotojas", "IdNaudotojas");
         ViewData["FkKodas"] = new SelectList(_context.Miestais, "Kodas", "Kodas");
-        ViewData["Tipas"] = new SelectList(_context.Tipais, "IdTipas", "IdTipas");
+        ViewData["Tipas"] = new SelectList(_context.Tipais, "IdTipas", "Name");
             return Page();
         }
 
