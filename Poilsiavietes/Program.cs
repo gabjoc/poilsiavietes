@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Poilsiavietes.Models;
+
+
 namespace Poilsiavietes
 {
     public class Program
@@ -6,8 +10,18 @@ namespace Poilsiavietes
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddRazorPages();
+
+            var connectionString = "server=localhost;user=root;password=;database=poilsiavietes";
+            var serverVersion = new MariaDbServerVersion(ServerVersion.AutoDetect(connectionString));
+
+            builder.Services.AddDbContext<PoilsiavietesContext>(
+                dbContextOptions => dbContextOptions
+                    .UseMySql(connectionString, serverVersion)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors()
+            );
 
             var app = builder.Build();
 
