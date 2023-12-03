@@ -92,9 +92,9 @@
                 @Html.DisplayFor(modelItem => item.TipasNavigation.IdTipas)
             </td>
             <td>
-                <a asp-page="./Redagavimas" asp-route-id="@item.IdPoilsiaviete">Edit</a> |
-                <a asp-page="./Perziura" asp-route-id="@item.IdPoilsiaviete">Details</a> |
-                <a asp-page="./Istrinimas" asp-route-id="@item.IdPoilsiaviete">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.IdPoilsiaviete">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.IdPoilsiaviete">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.IdPoilsiaviete">Delete</a>
             </td>
         </tr>
 }

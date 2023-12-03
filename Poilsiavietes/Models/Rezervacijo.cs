@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Poilsiavietes.Models;
 
-public partial class Rezervacijos
+public partial class Rezervacijo
 {
     public int Numeris { get; set; }
 
