@@ -25,6 +25,11 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         {
             if(dateFrom.Year != 1 &&  dateTill.Year != 1)
             {
+                if(dateTill <= dateFrom)
+                {
+                    TempData["ErrorMessage"] = "Nurodytas laikotarpis neteisingas.";
+                    return;
+                }
                 if (_context.Poilsiavietes != null)
                 {
                     Poilsiaviete = await FilterPoilsiavietes(dateFrom, dateTill);
