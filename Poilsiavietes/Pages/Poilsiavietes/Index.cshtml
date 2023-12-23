@@ -63,6 +63,10 @@
             }
         </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+        <div id="map" style="width: 1300px; height: 400px;"></div>
+    </div>
 }
 
 @if (TempData["ErrorMessage"] != null)
@@ -71,3 +75,44 @@
         alert("@TempData["ErrorMessage"]");
     </script>
 }
+
+<script>
+    // Initialize the map
+    function initMap() {
+        // Define an array of coordinates
+        var locationsData = @Html.Raw(Json.Serialize(TempData["SerializedLocations"]));
+        var locations = JSON.parse(locationsData);
+       
+        var bounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: bounds.getCenter(),
+            zoom: 8
+        });
+
+        locations.forEach(function (location) {
+            var marker = new google.maps.Marker({
+                position: { lat: location.Item1, lng: location.Item2 },
+                map: map
+            });
+
+            bounds.extend(marker.getPosition()); // Extend bounds to include marker
+
+            // Create an info window for each marker if you want to display more information
+            var infoWindow = new google.maps.InfoWindow({
+                content: "<strong>Poilsiavietės informacija:</strong><br>" + location.Item3
+                // You can add more information here
+            });
+
+            // Show info window on marker click (optional)
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+        });
+
+        // Fit the map to the bounds to display all markers within the map view
+        map.fitBounds(bounds);
+    }
+</script>
+
+<!-- Load the Google Maps JavaScript API with your API key -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxUd2RkANk9MTIJosYPGxxv-CDW7vkmSI&callback=initMap" async defer></script>
