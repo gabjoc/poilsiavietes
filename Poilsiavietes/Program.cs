@@ -22,7 +22,7 @@ namespace Poilsiavietes
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
-
+            builder.Services.AddControllers();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -41,7 +41,11 @@ namespace Poilsiavietes
             app.UseAuthorization();
 
             app.MapRazorPages();
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+            });
             app.Run();
         }
     }

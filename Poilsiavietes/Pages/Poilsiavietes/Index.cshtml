@@ -5,98 +5,114 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Poilsiaviečių sąrašas</h1>
+<h4>Pasirinkite norimą laikotarpį:</h4>
+<hr />
 
-<p>
-    <a asp-page="Kurimas">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Pavadinimas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].NaktiesKaina)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Adresas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].PastoKodas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].MiegamujuSkaicius)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].VoniosKambariuSk)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Taisykles)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Aktyvumas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].Reitingas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].FkIdNaudotojasNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].FkKodasNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Poilsiaviete[0].TipasNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Poilsiaviete) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pavadinimas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NaktiesKaina)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adresas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PastoKodas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MiegamujuSkaicius)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VoniosKambariuSk)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Taisykles)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aktyvumas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reitingas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkIdNaudotojasNavigation.IdNaudotojas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FkKodasNavigation.Kodas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipasNavigation.IdTipas)
-            </td>
-            <td>
-                <a asp-page="./Redagavimas" asp-route-id="@item.IdPoilsiaviete">Edit</a> |
-                <a asp-page="./Perziura" asp-route-id="@item.IdPoilsiaviete">Details</a> |
-                <a asp-page="./Istrinimas" asp-route-id="@item.IdPoilsiaviete">Delete</a>
-            </td>
-        </tr>
+<form method="get">
+    <label for="dateFrom">Data nuo:</label>
+    <input type="date" id="dateFrom" name="dateFrom" value="@Request.Query["dateFrom"]" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+    <label for="dateTill">Data iki:</label>
+    <input type="date" id="dateTill" name="dateTill" value="@Request.Query["dateTill"]" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+    <input type="submit" value="Ieškoti">
+</form>
+
+<hr />
+@if (Model.Poilsiaviete.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Poilsiaviete[0].Pavadinimas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Poilsiaviete[0].NaktiesKaina)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Poilsiaviete[0].Reitingas)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Poilsiaviete[0].Tipas)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Poilsiaviete)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pavadinimas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NaktiesKaina)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reitingas)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipasNavigation.Name)
+                    </td>
+                    <td>
+                        <a asp-page="./Redagavimas" asp-route-id="@item.IdPoilsiaviete">Redaguoti</a> |
+                        <a asp-page="./Perziura" asp-route-id="@item.IdPoilsiaviete">Peržiūrėti daugiau</a> |
+                        <a asp-page="./Istrinimas" asp-route-id="@item.IdPoilsiaviete">Ištrinti</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        <div id="map" style="width: 1300px; height: 400px;"></div>
+    </div>
 }
-    </tbody>
-</table>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <script>
+        alert("@TempData["ErrorMessage"]");
+    </script>
+}
+
+<script>
+    // Initialize the map
+    function initMap() {
+        // Define an array of coordinates
+        var locationsData = @Html.Raw(Json.Serialize(TempData["SerializedLocations"]));
+        var locations = JSON.parse(locationsData);
+       
+        var bounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: bounds.getCenter(),
+            zoom: 8
+        });
+
+        locations.forEach(function (location) {
+            var marker = new google.maps.Marker({
+                position: { lat: location.Item1, lng: location.Item2 },
+                map: map
+            });
+
+            bounds.extend(marker.getPosition()); // Extend bounds to include marker
+
+            // Create an info window for each marker if you want to display more information
+            var infoWindow = new google.maps.InfoWindow({
+                content: "<strong>Poilsiavietės informacija:</strong><br>" + location.Item3
+                // You can add more information here
+            });
+
+            // Show info window on marker click (optional)
+            marker.addListener('click', function () {
+                infoWindow.open(map, marker);
+            });
+        });
+
+        // Fit the map to the bounds to display all markers within the map view
+        map.fitBounds(bounds);
+    }
+</script>
+
+<!-- Load the Google Maps JavaScript API with your API key -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxUd2RkANk9MTIJosYPGxxv-CDW7vkmSI&callback=initMap" async defer></script>
