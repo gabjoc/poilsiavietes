@@ -40,7 +40,7 @@ public partial class Poilsiaviete
 
     public virtual ICollection<PoilsiavieciuPatogumai> PoilsiavieciuPatogumais { get; } = new List<PoilsiavieciuPatogumai>();
 
-    public virtual ICollection<Rezervacijos> Rezervacijos { get; } = new List<Rezervacijos>();
+    public virtual ICollection<Rezervacija> Rezervacijos { get; } = new List<Rezervacija>();
 
     public virtual Tipai? TipasNavigation { get; set; } = null;
 }

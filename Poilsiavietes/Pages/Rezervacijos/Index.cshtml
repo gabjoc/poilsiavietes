@@ -1,0 +1,114 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Pradzia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Pabaiga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Suma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].ZmoniuSk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Apmoketa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Vardas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Pavarde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].TelNumeris)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].ElPastas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].YraAugintinis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].SukurimoData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].BusenaNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].FkIdNaudotojasNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].FkIdPoilsiavieteNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Rezervacijos) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pradzia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pabaiga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZmoniuSk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apmoketa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vardas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pavarde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelNumeris)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElPastas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YraAugintinis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SukurimoData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusenaNavigation.IdBusena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIdNaudotojasNavigation.IdNaudotojas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIdPoilsiavieteNavigation.IdPoilsiaviete)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Numeris">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Numeris">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Numeris">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

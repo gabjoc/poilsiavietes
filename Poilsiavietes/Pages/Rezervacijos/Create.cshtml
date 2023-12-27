@@ -1,0 +1,101 @@
+﻿@page
+@model CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Rezervacijos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Numeris" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Numeris" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Numeris" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Pradzia" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Pradzia" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Pradzia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Pabaiga" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Pabaiga" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Pabaiga" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Suma" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Suma" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Suma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.ZmoniuSk" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.ZmoniuSk" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.ZmoniuSk" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="kuriamaRezervacija.Apmoketa" /> @Html.DisplayNameFor(model => model.kuriamaRezervacija.Apmoketa)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Vardas" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Vardas" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Vardas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Pavarde" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Pavarde" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Pavarde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.TelNumeris" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.TelNumeris" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.TelNumeris" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.ElPastas" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.ElPastas" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.ElPastas" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="kuriamaRezervacija.YraAugintinis" /> @Html.DisplayNameFor(model => model.kuriamaRezervacija.YraAugintinis)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.SukurimoData" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.SukurimoData" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.SukurimoData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Busena" class="control-label"></label>
+                <select asp-for="kuriamaRezervacija.Busena" class="form-control" asp-items="ViewBag.Busena"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.FkIdPoilsiaviete" class="control-label"></label>
+                <select asp-for="kuriamaRezervacija.FkIdPoilsiaviete" class="form-control" asp-items="ViewBag.FkIdPoilsiaviete"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.FkIdNaudotojas" class="control-label"></label>
+                <select asp-for="kuriamaRezervacija.FkIdNaudotojas" class="form-control" asp-items="ViewBag.FkIdNaudotojas"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

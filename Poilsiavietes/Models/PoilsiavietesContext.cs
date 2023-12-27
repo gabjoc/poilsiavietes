@@ -35,7 +35,7 @@ public partial class PoilsiavietesContext : DbContext
 
     public virtual DbSet<Poilsiaviete> Poilsiavietes { get; set; }
 
-    public virtual DbSet<Rezervacijos> Rezervacijos { get; set; }
+    public virtual DbSet<Rezervacija> Rezervacijos { get; set; }
 
     public virtual DbSet<Tipai> Tipais { get; set; }
 
@@ -372,7 +372,7 @@ public partial class PoilsiavietesContext : DbContext
                 .HasConstraintName("poilsiavietes_ibfk_1");
         });
 
-        modelBuilder.Entity<Rezervacijos>(entity =>
+        modelBuilder.Entity<Rezervacija>(entity =>
         {
             entity.HasKey(e => e.Numeris).HasName("PRIMARY");
 
