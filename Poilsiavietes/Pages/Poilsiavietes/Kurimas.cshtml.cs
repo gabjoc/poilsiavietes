@@ -17,7 +17,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         public IActionResult OnGet()
         {
         ViewData["FkIdNaudotojas"] = new SelectList(_context.Naudotojais, "IdNaudotojas", "IdNaudotojas");
-        ViewData["FkKodas"] = new SelectList(_context.Miestais, "Kodas", "Kodas");
+        ViewData["FkKodas"] = new SelectList(_context.Miestais, "Kodas", "Pavadinimas");
         ViewData["Tipas"] = new SelectList(_context.Tipais, "IdTipas", "Name");
             return Page();
         }
@@ -31,9 +31,15 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         {
           if (!ModelState.IsValid || _context.Poilsiavietes == null || Poilsiaviete == null)
             {
-                return Page();
+                TempData["Message"] = "Duomenys neteisingi.";
+                var routeValues = new RouteValueDictionary(RouteData.Values);
+                foreach (var queryParameter in HttpContext.Request.Query)
+                {
+                    routeValues[queryParameter.Key] = queryParameter.Value.ToString();
+                }
+                return RedirectToPage(routeValues);
             }
-
+            Poilsiaviete.FkIdNaudotojas = 1;
             _context.Poilsiavietes.Add(Poilsiaviete);
             await _context.SaveChangesAsync();
 

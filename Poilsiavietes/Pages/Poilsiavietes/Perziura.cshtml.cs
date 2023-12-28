@@ -18,26 +18,40 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             _context = context;
         }
 
-      public Poilsiaviete Poilsiaviete { get; set; } = default!; 
+        public Poilsiaviete Poilsiaviete { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, DateOnly dateFrom, DateOnly dateTill)
         {
             if (id == null || _context.Poilsiavietes == null)
             {
                 return NotFound();
             }
-
+            TempData["DateFrom"] = dateFrom.ToString();
+            TempData["DateTill"] = dateTill.ToString();
             var poilsiaviete = await _context.Poilsiavietes.Include(t => t.TipasNavigation)
-                .FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
+                .Include(m => m.FkKodasNavigation).FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
             if (poilsiaviete == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Poilsiaviete = poilsiaviete;
             }
             return Page();
+        }
+
+        public IActionResult OnGetRezervuoti()
+        {
+            bool prisNaudotojas = false;
+            if (prisNaudotojas == true)
+            {
+                return RedirectToPage("../Rezervacijos/RezKurimas");   
+            }
+            else
+            {
+                return RedirectToPage("../Profilis/Prisijungimas");
+            }
         }
     }
 }

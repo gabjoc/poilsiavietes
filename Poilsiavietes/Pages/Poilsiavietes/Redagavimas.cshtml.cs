@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,13 +23,14 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         [BindProperty]
         public Poilsiaviete Poilsiaviete { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id, DateOnly dateFrom, DateOnly dateTill)
         {
             if (id == null || _context.Poilsiavietes == null)
             {
                 return NotFound();
             }
-
+            TempData["DateFrom"] = dateFrom.ToString();
+            TempData["DateTill"] = dateTill.ToString();
             var poilsiaviete =  await _context.Poilsiavietes.FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
             if (poilsiaviete == null)
             {
@@ -67,8 +69,13 @@ namespace Poilsiavietes.Pages.Poilsiavietes
                     throw;
                 }
             }
-
-            return RedirectToPage("./Index");
+            TempData["Message"] = "Duomenys issaugoti sekmingai.";
+            var routeValues = new RouteValueDictionary(RouteData.Values);
+            foreach (var queryParameter in HttpContext.Request.Query)
+            {
+                routeValues[queryParameter.Key] = queryParameter.Value.ToString();
+            }
+            return RedirectToPage(routeValues);
         }
 
         private bool PoilsiavieteExists(int id)

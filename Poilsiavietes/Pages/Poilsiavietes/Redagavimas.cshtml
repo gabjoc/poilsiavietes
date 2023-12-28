@@ -71,9 +71,14 @@
         </form>
     </div>
 </div>
-
+@if (TempData["Message"] != null)
+{
+    <script>
+        alert("@TempData["Message"]");
+    </script>
+}
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index" asp-route-dateFrom="@TempData["DateFrom"]" asp-route-dateTill="@TempData["DateTill"]">Grįžti į sąrašą</a>
 </div>
 
 @section Scripts {

@@ -27,6 +27,8 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         {
             if (dateFrom.Year != 1 && dateTill.Year != 1)
             {
+                TempData["DateFrom"] = dateFrom.ToString();
+                TempData["DateTill"] = dateTill.ToString();
                 if (dateTill <= dateFrom)
                 {
                     TempData["ErrorMessage"] = "Nurodytas laikotarpis neteisingas.";
@@ -41,7 +43,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
                     using HttpClient client = new HttpClient();
                     foreach (Poilsiaviete poilsiaviete in Poilsiaviete)
                     {
-                        string apiUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(poilsiaviete.Adresas)}&key={apiKey}";
+                        string apiUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(poilsiaviete.Adresas+" "+poilsiaviete.FkKodasNavigation.Pavadinimas)}&key={apiKey}";
 
                         HttpResponseMessage response = await client.GetAsync(apiUrl);
 
