@@ -88,6 +88,7 @@
                                 @if (patogumas.FkIdPatogumasNavigation.FkIdKategorija == kategorija.IdKategorija)
                                 {
                                     @Html.DisplayFor(modelPatogumas => patogumas.FkIdPatogumasNavigation.Pavadinimas)
+                                    <a>| Kiekis:</a>  @Html.DisplayFor(modelPatogumas => patogumas.Kiekis)
                                     <br />
                                 }
                             }
