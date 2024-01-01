@@ -2,76 +2,106 @@
 @model DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Išsami informacija";
 }
 
-<h1>Details</h1>
+<h1>Išsami informacija</h1>
 
 <div>
-    <h4>Poilsiaviete</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.Pavadinimas)
-        </dt>
-        <dd class="col-sm-10">
+    <h4>
             @Html.DisplayFor(model => model.Poilsiaviete.Pavadinimas)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.NaktiesKaina)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.NaktiesKaina)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.Adresas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.Adresas)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.PastoKodas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.PastoKodas)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.MiegamujuSkaicius)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.MiegamujuSkaicius)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.VoniosKambariuSk)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.VoniosKambariuSk)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.Taisykles)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.Taisykles)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.Reitingas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.Reitingas)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.Tipas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.TipasNavigation.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Poilsiaviete.FkKodas)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Poilsiaviete.FkKodasNavigation.Pavadinimas)
-        </dd>
-    </dl>
+    </h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <dl class="row">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.NaktiesKaina)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.NaktiesKaina)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.Adresas)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.Adresas)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.PastoKodas)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.PastoKodas)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.MiegamujuSkaicius)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.MiegamujuSkaicius)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.VoniosKambariuSk)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.VoniosKambariuSk)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.Taisykles)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.Taisykles)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.Reitingas)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.Reitingas)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.Tipas)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.TipasNavigation.Name)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.Poilsiaviete.FkKodas)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Poilsiaviete.FkKodasNavigation.Pavadinimas)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col">
+                <h4>Siūlomi patogumai</h4>
+                <hr />
+                @if(Model.Poilsiaviete.PoilsiavieciuPatogumai.Count() > 0 )
+                {
+                    @foreach(Models.Kategorijo kategorija in Model.Kategorijos)
+                    {
+                        @if (Model.Poilsiaviete.PoilsiavieciuPatogumai.Any(p => p.FkIdPatogumasNavigation.FkIdKategorija == kategorija.IdKategorija))
+                        {
+                            <b>@Html.DisplayFor(modelKategorija => kategorija.Pavadinimas)</b>
+                            <br />
+                            @foreach (Models.PoilsiavieciuPatogumai patogumas in Model.Poilsiaviete.PoilsiavieciuPatogumai)
+                            {
+                                @if (patogumas.FkIdPatogumasNavigation.FkIdKategorija == kategorija.IdKategorija)
+                                {
+                                    @Html.DisplayFor(modelPatogumas => patogumas.FkIdPatogumasNavigation.Pavadinimas)
+                                    <br />
+                                }
+                            }
+                            <hr />
+                        }
+                    }
+                }
+                else
+                {
+                    <h6>Patogumų nėra</h6>
+                }
+            </div>
+        </div> 
+    </div>
 </div>
 <div>
     <a asp-page-handler="Rezervuoti">Rezervuoti</a> |
