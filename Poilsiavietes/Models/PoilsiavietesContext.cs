@@ -301,7 +301,7 @@ public partial class PoilsiavietesContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("sudaro");
 
-            entity.HasOne(d => d.FkIdPoilsiavieteNavigation).WithMany(p => p.PoilsiavieciuPatogumais)
+            entity.HasOne(d => d.FkIdPoilsiavieteNavigation).WithMany(p => p.PoilsiavieciuPatogumai)
                 .HasForeignKey(d => d.FkIdPoilsiaviete)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("yra");

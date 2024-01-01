@@ -41,7 +41,7 @@ public partial class Poilsiaviete
 
     public virtual Miestai? FkKodasNavigation { get; set; } = null;
 
-    public virtual ICollection<PoilsiavieciuPatogumai> PoilsiavieciuPatogumais { get; } = new List<PoilsiavieciuPatogumai>();
+    public virtual ICollection<PoilsiavieciuPatogumai> PoilsiavieciuPatogumai { get; } = new List<PoilsiavieciuPatogumai>();
 
     public virtual ICollection<Rezervacijos> Rezervacijos { get; } = new List<Rezervacijos>();
 
