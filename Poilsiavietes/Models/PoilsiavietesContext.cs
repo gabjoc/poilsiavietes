@@ -44,6 +44,9 @@ public partial class PoilsiavietesContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Naudotojai>()
+                .Property(p => p.IdNaudotojas)
+                .UseIdentityColumn();
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");

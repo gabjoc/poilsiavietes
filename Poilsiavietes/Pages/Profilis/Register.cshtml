@@ -1,0 +1,60 @@
+﻿@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.VartotojoVardas" class="control-label"></label>
+                <input asp-for="Naudotojai.VartotojoVardas" class="form-control" />
+                <span asp-validation-for="Naudotojai.VartotojoVardas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.Vardas" class="control-label"></label>
+                <input asp-for="Naudotojai.Vardas" class="form-control" />
+                <span asp-validation-for="Naudotojai.Vardas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.Pavarde" class="control-label"></label>
+                <input asp-for="Naudotojai.Pavarde" class="form-control" />
+                <span asp-validation-for="Naudotojai.Pavarde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.GimimoData" class="control-label"></label>
+                <input asp-for="Naudotojai.GimimoData" class="form-control" type="date" />
+                <span asp-validation-for="Naudotojai.GimimoData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.TelNumeris" class="control-label"></label>
+                <input asp-for="Naudotojai.TelNumeris" class="form-control" />
+                <span asp-validation-for="Naudotojai.TelNumeris" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.ElPastas" class="control-label"></label>
+                <input asp-for="Naudotojai.ElPastas" class="form-control" />
+                <span asp-validation-for="Naudotojai.ElPastas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naudotojai.Slaptazodis" class="control-label"></label>
+                <input asp-for="Naudotojai.Slaptazodis" class="form-control" />
+                <span asp-validation-for="Naudotojai.Slaptazodis" class="text-danger"></span>
+            </div>           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
