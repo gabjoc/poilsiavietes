@@ -89,6 +89,10 @@
                                 {
                                     @Html.DisplayFor(modelPatogumas => patogumas.FkIdPatogumasNavigation.Pavadinimas)
                                     <a>| Kiekis:</a>  @Html.DisplayFor(modelPatogumas => patogumas.Kiekis)
+                                    @if(patogumas.FkIdPatogumasNavigation.Paskirtis != null)
+                                    {
+                                        <a>|</a> @Html.DisplayFor(modelPatogumas => patogumas.FkIdPatogumasNavigation.Paskirtis)
+                                    }
                                     <br />
                                 }
                             }

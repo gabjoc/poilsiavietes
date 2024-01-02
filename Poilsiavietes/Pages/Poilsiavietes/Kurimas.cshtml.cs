@@ -20,6 +20,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             ViewData["FkKodas"] = new SelectList(_context.Miestais, "Kodas", "Pavadinimas");
             ViewData["Tipas"] = new SelectList(_context.Tipais, "IdTipas", "Name");
             ViewData["PoilsiavieciuPatogumai"] = new SelectList(_context.Patogumais, "IdPatogumas", "Pavadinimas");
+//          ViewData["AutomobiliuStovejimoAikstele"] = new SelectList(_context.AutomobiliuAiksteliuSavininkais, "IdAutomobiliuAikstelesSavininkas", "Vardas");
             return Page();
         }
 
