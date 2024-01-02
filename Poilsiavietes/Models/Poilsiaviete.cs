@@ -40,7 +40,7 @@ public partial class Poilsiaviete
     public virtual Naudotojai? FkIdNaudotojasNavigation { get; set; } = null;
 
     public virtual Miestai? FkKodasNavigation { get; set; } = null;
-
+    [DisplayName("Patogumai")]
     public virtual ICollection<PoilsiavieciuPatogumai> PoilsiavieciuPatogumai { get; } = new List<PoilsiavieciuPatogumai>();
 
     public virtual ICollection<Rezervacijos> Rezervacijos { get; } = new List<Rezervacijos>();

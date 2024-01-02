@@ -45,7 +45,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
                     {
                         if (poilsiaviete.Aktyvumas == false)
                             continue;
-                        string apiUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(poilsiaviete.Adresas+" "+poilsiaviete.FkKodasNavigation.Pavadinimas)}&key={apiKey}";
+                        string apiUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(poilsiaviete.Adresas.Replace(" ", "")+" "+poilsiaviete.FkKodasNavigation.Pavadinimas+" "+poilsiaviete.PastoKodas)}&key={apiKey}";
 
                         HttpResponseMessage response = await client.GetAsync(apiUrl);
 
