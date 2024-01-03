@@ -47,5 +47,5 @@ public partial class Naudotojai
 
     public virtual ICollection<Poilsiaviete> Poilsiavietes { get; } = new List<Poilsiaviete>();
 
-    public virtual ICollection<Rezervacijos> Rezervacijos { get; } = new List<Rezervacijos>();
+    public virtual ICollection<Rezervacija> Rezervacijos { get; } = new List<Rezervacija>();
 }

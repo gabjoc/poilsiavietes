@@ -17,5 +17,5 @@ public partial class Mokejimai
 
     public virtual Naudotojai FkIdNaudotojasNavigation { get; set; } = null!;
 
-    public virtual Rezervacijos FkNumerisNavigation { get; set; } = null!;
+    public virtual Rezervacija FkNumerisNavigation { get; set; } = null!;
 }

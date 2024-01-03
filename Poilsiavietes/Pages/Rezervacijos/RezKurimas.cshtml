@@ -1,12 +1,121 @@
 ﻿@page
-@model RezKurimasModel
+@model CreateModel
+
 @{
+    ViewData["Title"] = "Nauja rezervacija";
 }
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button onclick="document.location='/Rezervacijos/RezPerziura'" type="button" class="btn btn-outline-primary btn-lg">Išsaugoti</button>
+
+<h2>Kurti naują rezervaciją</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.Vardas" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.Vardas" class="form-control" />
+                <span asp-validation-for="kuriamRezervacija.Vardas" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.Pavarde" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.Pavarde" class="form-control" />
+                <span asp-validation-for="kuriamRezervacija.Pavarde" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.TelNumeris" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.TelNumeris" class="form-control" />
+                <span asp-validation-for="kuriamRezervacija.TelNumeris" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.ElPastas" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.ElPastas" class="form-control" />
+                <span asp-validation-for="kuriamRezervacija.ElPastas" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.ZmoniuSk" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.ZmoniuSk" class="form-control" />
+                <span asp-validation-for="kuriamRezervacija.ZmoniuSk" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="kuriamRezervacija.YraAugintinis" /> @Html.DisplayNameFor(model => model.kuriamRezervacija.YraAugintinis)
+                </label>
+            </div>
+
+            <!--
+                Neturėtų čia automatiškai susikurt rezervacijos numeris?
+            
+            <div class="form-group">
+                <label asp-for="kuriamaRezervacija.Numeris" class="control-label"></label>
+                <input asp-for="kuriamaRezervacija.Numeris" class="form-control" />
+                <span asp-validation-for="kuriamaRezervacija.Numeris" class="text-danger"></span>
+            </div>-->
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.Pradzia" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.Pradzia" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="kuriamRezervacija.Pradzia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.Pabaiga" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.Pabaiga" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="kuriamRezervacija.Pabaiga" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.Suma" class="control-label"></label>
+                <input asp-for="kuriamRezervacija.Suma" class="form-control" />
+                <span asp-validation-for="kuriamRezervacija.Suma" class="text-danger"></span>
+            </div>
+
+            <!--
+                Neturėtų čia automatiškai užsipildyti laukelis?
+            -->
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="kuriamRezervacija.Apmoketa" /> @Html.DisplayNameFor(model => model.kuriamRezervacija.Apmoketa)
+                </label>
+            </div>
+
+            <!--
+                Neturėtų čia automatiškai tsg būti rezervacijos sudarymo data?
+            -->
+            <div class="form-group">
+                <label asp-for="kuriamRezervacija.SukurimoData" class="control-label">Rezervacijos sudarymo data</label>
+                <input asp-for="kuriamRezervacija.SukurimoData" class="form-control" type="date" min="@DateTime.Now.ToString("yyyy-MM-dd")" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="kuriamRezervacija.SukurimoData" class="text-danger"></span>
+            </div>
+
+@*             <div class="form-group">
+                <label asp-for="kuriamRezervacija.Busena" class="control-label"></label>
+                <select asp-for="kuriamRezervacija.Busena" class="form-control" asp-items="@(ViewData["Busena"] as SelectList)"></select>
+            </div>
+ *@
+@*             <div class="form-group">
+                <label asp-for="kuriamRezervacija.FkIdPoilsiaviete" class="control-label"></label>
+                <select asp-for="kuriamRezervacija.FkIdPoilsiaviete" class="form-control" asp-items="ViewBag.FkIdPoilsiaviete"></select>
+            </div>
+ *@
+@*             <div class="form-group">
+                <label asp-for="kuriamRezervacija.FkIdNaudotojas" class="control-label"></label>
+                <select asp-for="kuriamRezervacija.FkIdNaudotojas" class="form-control" asp-items="ViewBag.FkIdNaudotojas"></select>
+            </div>
+ *@
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Rezervuoti" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
-<div class="text-center">
-    <h1 class="display-4">Rezervacijos kūrimas</h1>
-    <hr />
-    <img src="../unithorn.png" width="200" height="200" />
-</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -5,16 +5,17 @@ using Poilsiavietes.Models;
 
 namespace Poilsiavietes.Pages.Rezervacijos
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly PoilsiavietesContext _context;
 
-        public DetailsModel(PoilsiavietesContext context)
+        public DeleteModel(PoilsiavietesContext context)
         {
             _context = context;
         }
 
-      public Rezervacija Rezervacijos { get; set; } = default!; 
+        [BindProperty]
+      public Rezervacija Rezervacija { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -24,20 +25,34 @@ namespace Poilsiavietes.Pages.Rezervacijos
             }
 
             var rezervacija = await _context.Rezervacijos.FirstOrDefaultAsync(m => m.RezNumeris == id);
+
             if (rezervacija == null)
             {
                 return NotFound();
             }
             else 
             {
-                Rezervacijos = rezervacija;
+                Rezervacija = rezervacija;
             }
             return Page();
         }
-        public IActionResult OnGetAtsauktiRez()
-        {
-            return RedirectToPage("./Atsaukimas");
-        }
 
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null || _context.Rezervacijos == null)
+            {
+                return NotFound();
+            }
+            var rezervacija = await _context.Rezervacijos.FindAsync(id);
+
+            if (rezervacija != null)
+            {
+                Rezervacija = rezervacija;
+                _context.Rezervacijos.Remove(Rezervacija);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./RezSarasas");
+        }
     }
 }

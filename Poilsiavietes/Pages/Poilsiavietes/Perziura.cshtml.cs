@@ -52,7 +52,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
 
         public IActionResult OnGetRezervuoti()
         {
-            bool prisNaudotojas = false;
+            bool prisNaudotojas = true;
             if (prisNaudotojas == true)
             {
                 return RedirectToPage("../Rezervacijos/RezKurimas");   
