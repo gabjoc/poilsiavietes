@@ -23,9 +23,6 @@
                 @Html.DisplayNameFor(model => model.Rezervacijos[0].SukurimoData)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Rezervacijos[0].FkIdPoilsiavieteNavigation)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Rezervacijos[0].Pradzia)
             </th>
             <th>
@@ -47,9 +44,6 @@
                 @Html.DisplayFor(modelItem => item.SukurimoData)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FkIdPoilsiavieteNavigation.Pavadinimas)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Pradzia)
             </td>
             <td>
@@ -63,7 +57,7 @@
             </td>
             <td>
                 <a asp-page="./RezRedagavimas" asp-route-id="@item.RezNumeris">Redaguoti</a> |
-                <a asp-page="./RezPerziura" asp-route-id="@item.RezNumeris">Plačiau</a> |
+                <a asp-page="./RezPerziura" asp-route-id="@item.RezNumeris">Plačiau</a>
             </td>
         </tr>
 }
