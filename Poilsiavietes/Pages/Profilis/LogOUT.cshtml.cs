@@ -4,16 +4,10 @@ using Microsoft.AspNetCore.Identity;
 
 public class LogOUTModel : PageModel
 {
-    private readonly SignInManager<IdentityUser> _signInManager;
-
-    public LogOUTModel(SignInManager<IdentityUser> signInManager)
+    public IActionResult OnGet()
     {
-        _signInManager = signInManager;
-    }
 
-    public async Task<IActionResult> OnPostAsync()
-    {
-        await _signInManager.SignOutAsync();
+        // Redirect to the home page after logout
         return RedirectToPage("/Index");
     }
 }

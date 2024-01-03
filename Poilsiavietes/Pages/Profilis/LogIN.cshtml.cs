@@ -10,12 +10,6 @@ using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
 public class LogINModel : PageModel
 {
 
-    private readonly UserManager<Microsoft.AspNetCore.Identity.IdentityUser> _userManager;
-
-    public LogINModel(UserManager<Microsoft.AspNetCore.Identity.IdentityUser> userManager)
-    {
-        _userManager = userManager;
-    }
     private readonly PoilsiavietesContext _dbContext;
     private readonly ILogger<LogINModel> _logger;
 
