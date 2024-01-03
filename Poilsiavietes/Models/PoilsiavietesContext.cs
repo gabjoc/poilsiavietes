@@ -374,7 +374,7 @@ public partial class PoilsiavietesContext : DbContext
 
         modelBuilder.Entity<Rezervacija>(entity =>
         {
-            entity.HasKey(e => e.Numeris).HasName("PRIMARY");
+            entity.HasKey(e => e.RezNumeris).HasName("PRIMARY");
 
             entity.ToTable("rezervacijos");
 
@@ -384,7 +384,7 @@ public partial class PoilsiavietesContext : DbContext
 
             entity.HasIndex(e => e.FkIdNaudotojas, "tvarko");
 
-            entity.Property(e => e.Numeris)
+            entity.Property(e => e.RezNumeris)
                 .ValueGeneratedNever()
                 .HasColumnType("int(11)")
                 .HasColumnName("numeris");

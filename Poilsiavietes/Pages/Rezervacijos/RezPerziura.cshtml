@@ -1,7 +1,95 @@
 ﻿@page
-@model RezPerziuraModel
+@model DetailsModel
+
 @{
+    ViewData["Title"] = "Rez peržiūra";
 }
+
+<h1>Rezervacijos peržiūra</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.Vardas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.Vardas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.Pavarde)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.Pavarde)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.TelNumeris)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.TelNumeris)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.ElPastas)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.ElPastas)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.ZmoniuSk)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.ZmoniuSk)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.YraAugintinis)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.YraAugintinis)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.Pradzia)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.Pradzia)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.Pabaiga)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.Pabaiga)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.Suma)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.Suma)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.Apmoketa)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.Apmoketa)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.SukurimoData)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.SukurimoData)
+        </dd>
+@*         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.BusenaNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.BusenaNavigation.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rezervacijos.FkIdPoilsiavieteNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rezervacijos.FkIdPoilsiavieteNavigation.Pavadinimas)
+        </dd>
+ *@    </dl>
+</div>
 
 <script src="https://www.paypal.com/sdk/js?client-id=AZuXw_-oNc4FPfB0upy_o4-tmaNVxSLx82JX1EdRNz6CpIAphrUXj03gnnEKyN4l2aRhs3qubbMt5jrY"></script>
 
@@ -50,13 +138,7 @@
     });
 </script>
 
-
-
-<div class="text-center">
-    <h1 class="display-4">Rezervacijos peržiūra</h1>
-    <hr />
-    <img src="../unithorn.png" width="200" height="200" />
-</div>
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <button type="button" class="btn btn-outline-primary btn-lg">Atšaukti rezervaciją</button>
+<div>
+    <a asp-page-handler="AtsauktiRez">Atšaukti rezervaciją</a> |
+    <a asp-page="./RezSarasas">Grįžti į sąrašą</a>
 </div>

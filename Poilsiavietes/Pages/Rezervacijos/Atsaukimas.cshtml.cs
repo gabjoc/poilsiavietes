@@ -24,7 +24,7 @@ namespace Poilsiavietes.Pages.Rezervacijos
                 return NotFound();
             }
 
-            var rezervacija = await _context.Rezervacijos.FirstOrDefaultAsync(m => m.Numeris == id);
+            var rezervacija = await _context.Rezervacijos.FirstOrDefaultAsync(m => m.RezNumeris == id);
 
             if (rezervacija == null)
             {
@@ -52,7 +52,7 @@ namespace Poilsiavietes.Pages.Rezervacijos
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./RezSarasas");
         }
     }
 }

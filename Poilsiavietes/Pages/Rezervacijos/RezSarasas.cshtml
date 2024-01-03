@@ -1,33 +1,71 @@
 ﻿@page
-@model RezSarasasModel
+@model IndexModel
+
 @{
+    ViewData["Title"] = "Rez sąrašas";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Rezervacijų sąrašas</h1>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Numeris</th>
-                <th>Veiksmai</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>00001</td>
-                <td>
-                    <button onclick="document.location='RezPerziura'" class="btn btn-primary">Peržiūrėti</button>
-                    <button onclick="document.location='RezRedagavimas'" class="btn btn-success">Redaguoti</button>
-                </td>
-            </tr>
-            <tr>
-                <td>00002</td>
-                <td>
-                    <button onclick="document.location='RezPerziura'" class="btn btn-primary">Peržiūrėti</button>
-                    <button onclick="document.location='RezRedagavimas'" class="btn btn-success">Redaguoti</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<h1>Rezervacijų sąrašas</h1>
+<h4>Pasirinkite norimą būseną:</h4>
+
+<form method="get">
+    <label>Filtruoti pagal būseną:</label>
+    <select asp-for="Filter" asp-items="@Model.BusenuSarasas">
+        <option value="">Visos</option>
+    </select>
+    <button type="submit">Filtruoti</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].SukurimoData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].FkIdPoilsiavieteNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Pradzia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Pabaiga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].Suma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rezervacijos[0].BusenaNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Rezervacijos) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SukurimoData)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FkIdPoilsiavieteNavigation.Pavadinimas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pradzia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pabaiga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Suma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BusenaNavigation.Name)
+            </td>
+            <td>
+                <a asp-page="./RezRedagavimas" asp-route-id="@item.RezNumeris">Redaguoti</a> |
+                <a asp-page="./RezPerziura" asp-route-id="@item.RezNumeris">Plačiau</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
