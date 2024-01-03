@@ -1,57 +1,123 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using Poilsiavietes.Models;
-using System.Net;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Identity;
+using IdentityUser = Microsoft.AspNet.Identity.EntityFramework.IdentityUser;
+using IdentityRole = Microsoft.AspNetCore.Identity.IdentityRole;
 
 public class LogINModel : PageModel
 {
-    [BindProperty]
-    public Credential Credential { get; set; }
 
-    public void OnGet()
+    private readonly UserManager<Microsoft.AspNetCore.Identity.IdentityUser> _userManager;
+
+    public LogINModel(UserManager<Microsoft.AspNetCore.Identity.IdentityUser> userManager)
     {
+        _userManager = userManager;
     }
-    public async Task<IActionResult> OnPostAsync()
+    private readonly PoilsiavietesContext _dbContext;
+    private readonly ILogger<LogINModel> _logger;
+
+    public LogINModel(PoilsiavietesContext dbContext, ILogger<LogINModel> logger)
     {
-        if (ModelState.IsValid) return RedirectToPage("/Index");
+        _dbContext = dbContext;
+        _logger = logger;
+    }
 
-        //Verify the credential
-        if(Credential.UserName =="sun" && Credential.Password=="shit")
+    [BindProperty]
+    public InputModel Input { get; set; }
+
+    public class InputModel
+    {
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (ModelState.IsValid)
         {
-            //Creating security context
-            var claims = new List<Claim>
+            var user = _dbContext.Naudotojais.FirstOrDefault(u => u.VartotojoVardas == Input.UserName && u.Slaptazodis == Input.Password);
+            if (user != null)
             {
-                new Claim(ClaimTypes.Name, "admin"),
-                new Claim(ClaimTypes.Email, "admin@gmail.com")
-            };
-            var identity = new ClaimsIdentity(claims, "cookie");
-            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
-
-            await HttpContext.SignInAsync("cookie", claimsPrincipal);
-
-            return RedirectToPage("/");
+                // Successful login logic
+                return RedirectToPage("/Index");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+            }
         }
+
         return Page();
     }
 
-   
-}
-public class Credential
-{
-    [Required(ErrorMessage = "Username is required.")]
-    [Display(Name = "Vartotojo vardas")]
-    public string UserName { get; set; }
+    public class IdentitySeedData
+    {
+        public static async Task Initialize(PoilsiavietesContext context,
+        UserManager<IdentityUser> userManager,
+        RoleManager<IdentityRole> roleManager)
+        {
 
-    [Required(ErrorMessage = "Email is required.")]
-    [EmailAddress(ErrorMessage = "Invalid email address.")]
-    public string Email { get; set; }
+            context.Database.EnsureCreated();
 
-    [Required(ErrorMessage = "Password is required.")]
-    //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{9,}$", ErrorMessage = "The password must have at least one upper case letter, one number, one symbol, and be at least 9 characters long.")]
-    [DataType(DataType.Password)]
-    public string Password { get; set; }
+            string asdminRole = "Admin";
+            string memberRole = "Member";
+            string password4all = "Password123#";
+
+            if (await roleManager.FindByNameAsync(asdminRole) == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole(asdminRole));
+            }
+
+            if (await roleManager.FindByNameAsync(memberRole) == null)
+            {
+                await roleManager.CreateAsync(new IdentityRole(memberRole));
+            }
+
+            if (await userManager.FindByNameAsync("aa@aa.aa") == null)
+            {
+                var user = new IdentityUser
+                {
+                    UserName = "aa@aa.aa",
+                    Email = "aa@aa.aa",
+                    PhoneNumber = "6902341234"
+                };
+
+                var result = await userManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(user, password4all);
+                    await userManager.AddToRoleAsync(user, asdminRole);
+                }
+            }
+
+            if (await userManager.FindByNameAsync("mm@mm.mm") == null)
+            {
+                var user = new IdentityUser
+                {
+                    UserName = "mm@mm.mm",
+                    Email = "mm@mm.mm",
+                    PhoneNumber = "1112223333"
+                };
+
+                var result = await userManager.CreateAsync(user);
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(user, password4all);
+                    await userManager.AddToRoleAsync(user, memberRole);
+                }
+            }
+        }
+
+        internal static object Initialize(PoilsiavietesContext context, UserManager<IdentityUser> userMgr, RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole> roleMgr)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
