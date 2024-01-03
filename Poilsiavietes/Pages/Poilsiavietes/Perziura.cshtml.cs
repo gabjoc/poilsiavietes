@@ -19,6 +19,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         }
 
         public Poilsiaviete Poilsiaviete { get; set; } = default!;
+        public AutomobiliuStovejimoAikstele Automobiliai { get; set; } = default!;
         public List<Kategorijo> Kategorijos { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id, DateOnly dateFrom, DateOnly dateTill)
@@ -58,7 +59,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             }
             else
             {
-                return RedirectToPage("../Profilis/Prisijungimas");
+                return RedirectToPage("../Profilis/Register");
             }
         }
     }

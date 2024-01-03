@@ -22,6 +22,13 @@ namespace Poilsiavietes
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors()
             );
+            //builder.Services.AddAuthentication().AddCookie("cookie", options =>
+            //{
+            //    options.Cookie.Name = "cookie";
+            //    options.LoginPath = "/LogIN";
+            //    options.LogoutPath = "/LogOUT";
+            //});
+
             builder.Services.AddControllers();
             var app = builder.Build();
 
@@ -38,6 +45,8 @@ namespace Poilsiavietes
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapRazorPages();
