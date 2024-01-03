@@ -19,6 +19,8 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         }
 
         public Poilsiaviete Poilsiaviete { get; set; } = default!;
+        public AutomobiliuStovejimoAikstele Automobiliai { get; set; } = default!;
+        public List<Kategorijo> Kategorijos { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id, DateOnly dateFrom, DateOnly dateTill)
         {
@@ -29,7 +31,12 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             TempData["DateFrom"] = dateFrom.ToString();
             TempData["DateTill"] = dateTill.ToString();
             var poilsiaviete = await _context.Poilsiavietes.Include(t => t.TipasNavigation)
-                .Include(m => m.FkKodasNavigation).FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
+                .Include(m => m.FkKodasNavigation).Include(p => p.PoilsiavieciuPatogumai)
+                .ThenInclude(p => p.FkIdPatogumasNavigation)
+                .ThenInclude(k => k.FkIdKategorijaNavigation)
+                .Include(a => a.AutomobiliuStovejimoAiksteles)
+                .ThenInclude(s => s.FkIdAutomobiliuAikstelesSavininkasNavigation).FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
+            var kategorijos = await _context.Kategorijos.ToListAsync();
             if (poilsiaviete == null)
             {
                 return NotFound();
@@ -37,6 +44,8 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             else
             {
                 Poilsiaviete = poilsiaviete;
+
+                Kategorijos = kategorijos;
             }
             return Page();
         }
@@ -50,7 +59,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             }
             else
             {
-                return RedirectToPage("../Profilis/Prisijungimas");
+                return RedirectToPage("../Profilis/Register");
             }
         }
     }

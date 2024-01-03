@@ -65,8 +65,50 @@
                 <label asp-for="Poilsiaviete.FkKodas" class="control-label"></label>
                 <select asp-for="Poilsiaviete.FkKodas" class ="form-control" asp-items="ViewBag.FkKodas"></select>
             </div>
+            <hr />
+            <h6>Automobilių stovėjimo aikštelė(neprivaloma)</h6>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Aikstele.Apmokama" /> @Html.DisplayNameFor(model => model.Aikstele.Apmokama)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aikstele.Pavadinimas" class="control-label"></label>
+                    <input asp-for="Aikstele.Pavadinimas" class="form-control" />
+                    
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aikstele.VietosAprasymas" class="control-label"></label>
+                    <input asp-for="Aikstele.VietosAprasymas" class="form-control" />
+                  
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aikstele.VietuSk" class="control-label"></label>
+                    <input asp-for="Aikstele.VietuSk" class="form-control" />
+                    
+                </div>
+                <div class="form-group">
+                    <label asp-for="Aikstele.Adresas" class="control-label"></label>
+                    <input asp-for="Aikstele.Adresas" class="form-control" />
+                    
+                </div>
+            <hr />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Poilsiaviete.PoilsiavieciuPatogumai" class="control-label"></label>
+                <div>
+                    @foreach (var item in ViewBag.PoilsiavieciuPatogumai)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="SelectedPatogumas" value="@item.Value">
+                            <label class="form-check-label">@item.Text</label>
+                            <input type="number" name="PatogumasCount" class="form-control ml-2" value="1" min="1" max="10">
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Išsaugoti" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -78,7 +120,7 @@
     </script>
 }
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="../Index">Grįžti į pagrindinį puslapį</a>
 </div>
 
 @section Scripts {

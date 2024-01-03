@@ -30,7 +30,9 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             }
             TempData["DateFrom"] = dateFrom.ToString();
             TempData["DateTill"] = dateTill.ToString();
-            var poilsiaviete = await _context.Poilsiavietes.FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
+            var poilsiaviete = await _context.Poilsiavietes.Include(k => k.FkKodasNavigation)
+                .Include(t => t.TipasNavigation)
+                .FirstOrDefaultAsync(m => m.IdPoilsiaviete == id);
 
             if (poilsiaviete == null)
             {
@@ -51,11 +53,22 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             }
             var poilsiaviete = await _context.Poilsiavietes.FindAsync(id);
 
+
             if (poilsiaviete != null)
             {
-                Poilsiaviete = poilsiaviete;
-                _context.Poilsiavietes.Remove(Poilsiaviete);
-                await _context.SaveChangesAsync();
+                var Rezervacijos = await _context.Rezervacijos
+                .Where(r => r.Busena < 3)
+                .Where(r => r.FkIdPoilsiaviete == id).ToListAsync();
+                if (poilsiaviete.Aktyvumas == false || Rezervacijos.Count == 0)
+                {
+                    Poilsiaviete = poilsiaviete;
+                    _context.Poilsiavietes.Remove(Poilsiaviete);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Poilsiaviete turi aktyviu rezervaciju.";
+                }
             }
 
             return RedirectToPage("./Index", new {dateFrom=dateFrom, dateTill=dateTill});

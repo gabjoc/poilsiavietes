@@ -32,16 +32,8 @@
                 <input asp-for="Poilsiaviete.PastoKodas" class="form-control" />
                 <span asp-validation-for="Poilsiaviete.PastoKodas" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Poilsiaviete.MiegamujuSkaicius" class="control-label"></label>
-                <input asp-for="Poilsiaviete.MiegamujuSkaicius" class="form-control" />
-                <span asp-validation-for="Poilsiaviete.MiegamujuSkaicius" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Poilsiaviete.VoniosKambariuSk" class="control-label"></label>
-                <input asp-for="Poilsiaviete.VoniosKambariuSk" class="form-control" />
-                <span asp-validation-for="Poilsiaviete.VoniosKambariuSk" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Poilsiaviete.MiegamujuSkaicius" />
+            <input type="hidden" asp-for="Poilsiaviete.VoniosKambariuSk" />
             <div class="form-group">
                 <label asp-for="Poilsiaviete.Taisykles" class="control-label"></label>
                 <input asp-for="Poilsiaviete.Taisykles" class="form-control" />
@@ -61,9 +53,12 @@
                 <label asp-for="Poilsiaviete.Tipas" class="control-label"></label>
                 <select asp-for="Poilsiaviete.Tipas" class="form-control" asp-items="ViewBag.Tipas"></select>
             </div>
+            <div class="form-group">
+                <label asp-for="Poilsiaviete.FkKodas" class="control-label"></label>
+                <select asp-for="Poilsiaviete.FkKodas" class="form-control" asp-items="ViewBag.FkKodas"></select>
+            </div>
             <input type="hidden" asp-for="Poilsiaviete.IdPoilsiaviete" />
             <input type="hidden" asp-for="Poilsiaviete.FkIdNaudotojas" />
-            <input type="hidden" asp-for="Poilsiaviete.FkKodas" />
             <br>
             <div class="form-group">
                 <input type="submit" value="Išsaugoti" class="btn btn-primary" />

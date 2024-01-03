@@ -34,14 +34,14 @@ public partial class Poilsiaviete
     public int FkIdNaudotojas { get; set; }
     [DisplayName("Miestas")]
     public int FkKodas { get; set; }
-
-    public virtual ICollection<AutomobiliuStovejimoAikstele> AutomobiliuStovejimoAiksteles { get; } = new List<AutomobiliuStovejimoAikstele>();
+    [DisplayName("Automobilių stovėjimo aikštelė")]
+    public virtual ICollection<AutomobiliuStovejimoAikstele>? AutomobiliuStovejimoAiksteles { get; } = new List<AutomobiliuStovejimoAikstele>();
 
     public virtual Naudotojai? FkIdNaudotojasNavigation { get; set; } = null;
 
     public virtual Miestai? FkKodasNavigation { get; set; } = null;
-
-    public virtual ICollection<PoilsiavieciuPatogumai> PoilsiavieciuPatogumais { get; } = new List<PoilsiavieciuPatogumai>();
+    [DisplayName("Patogumai")]
+    public virtual ICollection<PoilsiavieciuPatogumai> PoilsiavieciuPatogumai { get; } = new List<PoilsiavieciuPatogumai>();
 
     public virtual ICollection<Rezervacija> Rezervacijos { get; } = new List<Rezervacija>();
 

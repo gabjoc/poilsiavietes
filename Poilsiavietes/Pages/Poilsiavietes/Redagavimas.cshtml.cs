@@ -38,7 +38,7 @@ namespace Poilsiavietes.Pages.Poilsiavietes
             }
             Poilsiaviete = poilsiaviete;
            ViewData["FkIdNaudotojas"] = new SelectList(_context.Naudotojais, "IdNaudotojas", "IdNaudotojas");
-           ViewData["FkKodas"] = new SelectList(_context.Miestais, "Kodas", "Kodas");
+           ViewData["FkKodas"] = new SelectList(_context.Miestais, "Kodas", "Pavadinimas");
            ViewData["Tipas"] = new SelectList(_context.Tipais, "IdTipas", "Name");
             return Page();
         }

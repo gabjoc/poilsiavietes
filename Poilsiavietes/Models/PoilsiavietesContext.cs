@@ -44,6 +44,9 @@ public partial class PoilsiavietesContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Naudotojai>()
+                .Property(p => p.IdNaudotojas)
+                .UseIdentityColumn();
         modelBuilder
             .UseCollation("utf8mb4_general_ci")
             .HasCharSet("utf8mb4");
@@ -301,7 +304,7 @@ public partial class PoilsiavietesContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("sudaro");
 
-            entity.HasOne(d => d.FkIdPoilsiavieteNavigation).WithMany(p => p.PoilsiavieciuPatogumais)
+            entity.HasOne(d => d.FkIdPoilsiavieteNavigation).WithMany(p => p.PoilsiavieciuPatogumai)
                 .HasForeignKey(d => d.FkIdPoilsiaviete)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("yra");
