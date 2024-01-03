@@ -25,6 +25,8 @@ namespace Poilsiavietes.Pages.Poilsiavietes
 
         [BindProperty]
         public Poilsiaviete Poilsiaviete { get; set; } = default!;
+        [BindProperty]
+        public AutomobiliuStovejimoAikstele Aikstele { get; set; } = default!;
 
         public List<string> SelectedPatogumas { get; set; } = new List<string>();
         public List<int> PatogumasCount { get; set; } = new List<int>();
@@ -32,7 +34,10 @@ namespace Poilsiavietes.Pages.Poilsiavietes
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(List<int> SelectedPatogumas, List<int> PatogumasCount)
         {
-          if (!ModelState.IsValid || _context.Poilsiavietes == null || Poilsiaviete == null)
+            bool pildomaAikstele = Aikstele.Apmokama || Aikstele.VietosAprasymas != null || Aikstele.Adresas != null || Aikstele.VietuSk != 0 || Aikstele.Pavadinimas != null;
+            bool aiksteleTuriTusciuLauku = Aikstele.VietosAprasymas == null || Aikstele.Adresas == null || Aikstele.VietuSk == 0 || Aikstele.Pavadinimas == null;
+
+          if (!ModelState.IsValid || _context.Poilsiavietes == null || Poilsiaviete == null || aiksteleTuriTusciuLauku)
             {
                 TempData["Message"] = "Duomenys neteisingi.";
                 var routeValues = new RouteValueDictionary(RouteData.Values);
@@ -59,6 +64,14 @@ namespace Poilsiavietes.Pages.Poilsiavietes
                 _context.PoilsiavieciuPatogumais.Add(patogumas);
                 await _context.SaveChangesAsync();
             }
+            if(pildomaAikstele == true) 
+            {
+                Aikstele.FkIdPoilsiaviete = sukurtapoilsiaviete.IdPoilsiaviete;
+                Aikstele.FkIdAutomobiliuAikstelesSavininkas = sukurtapoilsiaviete.FkIdNaudotojas;
+                _context.AutomobiliuStovejimoAiksteles.Add(Aikstele);
+                await _context.SaveChangesAsync();
+            }
+
             return RedirectToPage("./Index");
         }
     }

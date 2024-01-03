@@ -56,9 +56,19 @@ namespace Poilsiavietes.Pages.Poilsiavietes
 
             if (poilsiaviete != null)
             {
-                Poilsiaviete = poilsiaviete;
-                _context.Poilsiavietes.Remove(Poilsiaviete);
-                await _context.SaveChangesAsync();
+                var Rezervacijos = await _context.Rezervacijos
+                .Where(r => r.Busena < 3)
+                .Where(r => r.FkIdPoilsiaviete == id).ToListAsync();
+                if (poilsiaviete.Aktyvumas == false || Rezervacijos.Count == 0)
+                {
+                    Poilsiaviete = poilsiaviete;
+                    _context.Poilsiavietes.Remove(Poilsiaviete);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Poilsiaviete turi aktyviu rezervaciju.";
+                }
             }
 
             return RedirectToPage("./Index", new {dateFrom=dateFrom, dateTill=dateTill});

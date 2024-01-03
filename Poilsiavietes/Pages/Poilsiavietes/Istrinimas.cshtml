@@ -78,7 +78,12 @@
             @Html.DisplayFor(model => model.Poilsiaviete.TipasNavigation.Name)
         </dd>
     </dl>
-    
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            alert("@TempData["ErrorMessage"]");
+        </script>
+    }
     <form method="post">
         <input type="hidden" asp-for="Poilsiaviete.IdPoilsiaviete" />
         <input type="hidden" asp-for="@TempData["DateFrom"]" />

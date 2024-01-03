@@ -34,8 +34,8 @@ public partial class Poilsiaviete
     public int FkIdNaudotojas { get; set; }
     [DisplayName("Miestas")]
     public int FkKodas { get; set; }
-
-    public virtual ICollection<AutomobiliuStovejimoAikstele> AutomobiliuStovejimoAiksteles { get; } = new List<AutomobiliuStovejimoAikstele>();
+    [DisplayName("Automobilių stovėjimo aikštelė")]
+    public virtual ICollection<AutomobiliuStovejimoAikstele>? AutomobiliuStovejimoAiksteles { get; } = new List<AutomobiliuStovejimoAikstele>();
 
     public virtual Naudotojai? FkIdNaudotojasNavigation { get; set; } = null;
 

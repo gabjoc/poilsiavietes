@@ -89,6 +89,10 @@
                                 {
                                     @Html.DisplayFor(modelPatogumas => patogumas.FkIdPatogumasNavigation.Pavadinimas)
                                     <a>| Kiekis:</a>  @Html.DisplayFor(modelPatogumas => patogumas.Kiekis)
+                                    @if(patogumas.FkIdPatogumasNavigation.Paskirtis != null)
+                                    {
+                                        <a>|</a> @Html.DisplayFor(modelPatogumas => patogumas.FkIdPatogumasNavigation.Paskirtis)
+                                    }
                                     <br />
                                 }
                             }
@@ -98,7 +102,42 @@
                 }
                 else
                 {
-                    <h6>Patogumų nėra</h6>
+                    <h6>Patogumų nėra</h6> <hr />
+                }
+                <br />
+                <br />
+                <h4>Stovėjimo aikštelės</h4>
+                <hr />
+                @if (Model.Poilsiaviete.AutomobiliuStovejimoAiksteles.Count() > 0)
+                {
+                    @foreach (Models.AutomobiliuStovejimoAikstele aikstele in Model.Poilsiaviete.AutomobiliuStovejimoAiksteles)
+                    {
+                        @Html.DisplayFor(modelAikstele => aikstele.Pavadinimas) <br />
+                        <a> Vietų skaičius:</a>  @Html.DisplayFor(modelAikstele => aikstele.VietuSk)
+                        <br />
+                        <a> Vietos aprašas:</a>  @Html.DisplayFor(modelAikstele => aikstele.VietosAprasymas) <br />
+                        <a> Adresas:</a>  @Html.DisplayFor(modelAikstele => aikstele.Adresas) <br />
+                        <a> Ar mokama:</a> 
+                        @if(aikstele.Apmokama == true)
+                        {
+                            <a> taip</a> <br />
+                        }
+                        else
+                        {
+                            <a> ne</a> <br />
+                        }
+                        <br />
+                        <h5>Stovėjimo aikštelės savininkas</h5>
+                        <hr />
+                        @Html.DisplayFor(modelAikstele => aikstele.FkIdAutomobiliuAikstelesSavininkasNavigation.Vardas) <a> </a>
+                        @Html.DisplayFor(modelAikstele => aikstele.FkIdAutomobiliuAikstelesSavininkasNavigation.Pavarde) <br />
+                        @Html.DisplayFor(modelAikstele => aikstele.FkIdAutomobiliuAikstelesSavininkasNavigation.TelNumeris) <br />
+                        @Html.DisplayFor(modelAikstele => aikstele.FkIdAutomobiliuAikstelesSavininkasNavigation.ElPastas) <br />
+                    }
+                }
+                else
+                {
+                    <h6>Stovėjimo aikštelių nėra</h6>
                 }
             </div>
         </div> 
